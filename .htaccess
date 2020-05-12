@@ -1,0 +1,16 @@
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^project.com [NC]
+RewriteRule ^(.*)$ http://www.project.com/$1 [L,R=301]
+
+RewriteRule ^feed/$   /feed.php [L]
+
+RewriteBase /
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !(.*)/$
+RewriteCond %{REQUEST_FILENAME} !\.(gif|jpg|png|jpeg|css|js|pdf|zip|webp)$ [NC]
+RewriteRule ^(.*)$ http://%{HTTP_HOST}/$1/ [L,R=301]
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s(.*)/index\.php [NC]
+RewriteRule ^ %1 [R=301,L]
+
+RewriteRule ^404.html   /index.php?page=404 [L]
